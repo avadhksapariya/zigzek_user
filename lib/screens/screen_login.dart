@@ -1,3 +1,4 @@
+import 'package:country_code_picker_plus/country_code_picker_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:zigzek_user/color_palettes.dart';
 import 'package:zigzek_user/customs/custom_textfield.dart';
@@ -40,11 +41,33 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0).copyWith(top: 20.0),
-                child: CustomTextField(
-                  controller: mobileController,
-                  enableField: true,
-                  required: true,
-                  maxLines: 1,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      child: CountryCodePicker(
+                        mode: CountryCodePickerMode.dialog,
+                        boxDecoration: const BoxDecoration(
+                          color: ColorPalettes.appBlackColor,
+                        ),
+                        onChanged: (country) {
+                          print('Country code selected: ${country.code}');
+                        },
+                        initialSelection: 'US',
+                        showFlag: true,
+                        showDropDownButton: true,
+                      ),
+                    ),
+                    Flexible(
+                      child: CustomTextField(
+                        controller: mobileController,
+                        enableField: true,
+                        required: true,
+                        isTypeNumber: true,
+                        maxLines: 1,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

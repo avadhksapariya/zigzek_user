@@ -41,6 +41,17 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    InputBorder textFieldBorder = const OutlineInputBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(24),
+      ),
+      gapPadding: 4.0,
+      borderSide: BorderSide(
+        width: 1,
+        color: ColorPalettes.borderColor,
+      ),
+    );
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
@@ -59,16 +70,9 @@ class CustomTextField extends StatelessWidget {
           return null;
         },
         decoration: InputDecoration(
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(24),
-            ),
-            gapPadding: 4.0,
-            borderSide: BorderSide(
-              width: 1,
-              color: ColorPalettes.borderColor,
-            ),
-          ),
+          border: textFieldBorder,
+          enabledBorder: textFieldBorder,
+          focusedBorder: textFieldBorder,
           errorBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(24),
