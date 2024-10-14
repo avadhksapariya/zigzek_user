@@ -16,7 +16,7 @@ class CustomTextField extends StatelessWidget {
     this.maxLength,
     this.showCounterText,
     this.isObscureText = false,
-    this.prefix,
+    this.prefixIcon,
     this.tap,
     this.changed,
     this.submit,
@@ -34,7 +34,7 @@ class CustomTextField extends StatelessWidget {
   final int? maxLength;
   final bool? showCounterText;
   final bool isObscureText;
-  final Widget? prefix;
+  final Widget? prefixIcon;
   final void Function()? tap;
   final void Function(String?)? changed;
   final void Function(String?)? submit;
@@ -82,7 +82,7 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 14.0),
-        prefix: prefix,
+        prefixIcon: prefixIcon,
         labelText: label,
         labelStyle: const TextStyle(color: ColorPalettes.secondaryTextColor),
         alignLabelWithHint: true,

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:zigzek_user/color_palettes.dart';
 import 'package:zigzek_user/customs/custom_button.dart';
 import 'package:zigzek_user/customs/custom_textfield.dart';
+import 'package:zigzek_user/screens/screen_otp.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -104,8 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   padding: const EdgeInsets.only(left: 8.0),
                                   child: CustomTextField(
                                     controller: mobileController,
-                                    prefix: Padding(
-                                      padding: const EdgeInsets.only(right: 2.0),
+                                    prefixIcon: Padding(
+                                      padding: const EdgeInsets.fromLTRB(8.0, 13.7, 2.0, 13.7),
                                       child: Text(
                                         prefixCode,
                                         style: const TextStyle(color: ColorPalettes.borderColor),
@@ -127,6 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             formKey.currentState!.save();
                             if (formKey.currentState!.validate()) {
                               log('Go ahead, valid credentials.');
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const OTPScreen()));
                             } else {
                               log('Invalid credentials.');
                             }
