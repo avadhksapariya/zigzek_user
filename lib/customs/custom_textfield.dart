@@ -14,7 +14,6 @@ class CustomTextField extends StatelessWidget {
     this.isTypeNumber,
     this.maxLines,
     this.maxLength,
-    this.errorText = '',
     this.showCounterText,
     this.isObscureText = false,
     this.prefix,
@@ -33,7 +32,6 @@ class CustomTextField extends StatelessWidget {
   final bool? isTypeNumber;
   final int? maxLines;
   final int? maxLength;
-  final String? errorText;
   final bool? showCounterText;
   final bool isObscureText;
   final Widget? prefix;
@@ -73,7 +71,6 @@ class CustomTextField extends StatelessWidget {
         border: textFieldBorder,
         enabledBorder: textFieldBorder,
         focusedBorder: textFieldBorder,
-        errorText: errorText,
         errorBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(24),
@@ -98,7 +95,7 @@ class CustomTextField extends StatelessWidget {
       switch (inputType) {
         case 'phone':
           var phoneLength = value.toString().length;
-          if (phoneLength <= 10) {
+          if (phoneLength < 10) {
             return 'Enter mobile number';
           }
       }
