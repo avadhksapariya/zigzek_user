@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zigzek_user/color_palettes.dart';
+import 'package:zigzek_user/constants/color_palettes.dart';
 import 'package:zigzek_user/screens/screen_login.dart';
 
 class SplashScreen extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zigzek_user/color_palettes.dart';
+import 'package:zigzek_user/constants/color_palettes.dart';
+import 'package:zigzek_user/constants/project_strings.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -81,6 +82,7 @@ class CustomTextField extends StatelessWidget {
             color: ColorPalettes.redPrimaryColor,
           ),
         ),
+        errorStyle: const TextStyle(color: ColorPalettes.errorColor),
         contentPadding: const EdgeInsets.symmetric(horizontal: 14.0),
         prefixIcon: prefixIcon,
         labelText: label,
@@ -96,7 +98,7 @@ class CustomTextField extends StatelessWidget {
         case 'phone':
           var phoneLength = value.toString().length;
           if (phoneLength < 10) {
-            return 'Enter mobile number';
+            return ProjectStrings.lsEmptyMobileError;
           }
       }
     }

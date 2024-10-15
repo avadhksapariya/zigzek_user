@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:country_code_picker_plus/country_code_picker_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:zigzek_user/color_palettes.dart';
+import 'package:zigzek_user/constants/color_palettes.dart';
+import 'package:zigzek_user/constants/project_strings.dart';
 import 'package:zigzek_user/customs/custom_button.dart';
 import 'package:zigzek_user/customs/custom_textfield.dart';
 import 'package:zigzek_user/screens/screen_otp.dart';
@@ -47,19 +48,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: screenHeight * 0.86,
                     child: Column(
                       children: [
+                        // Image
                         const Image(
                           image: AssetImage('assets/images/img_userphone1.png'),
                           height: 275,
                           width: 250,
                         ),
+                        // Title
                         const Text(
-                          'Enter your mobile number',
+                          ProjectStrings.lsTitle,
                           style: TextStyle(fontSize: 20),
                         ),
+                        // SubTitle
                         const Padding(
                           padding: EdgeInsets.all(4.0),
                           child: Text(
-                            'We will send you a confirmation code',
+                            ProjectStrings.lsSubTitle,
                             style: TextStyle(fontSize: 12, color: ColorPalettes.secondaryTextColor),
                           ),
                         ),
@@ -69,6 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              // Country Code Dropdown
                               Flexible(
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -83,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: CountryCodePicker(
                                       mode: CountryCodePickerMode.dialog,
                                       boxDecoration: const BoxDecoration(
-                                        color: ColorPalettes.appBlackColor,
+                                        color: ColorPalettes.backgroundColor,
                                       ),
                                       onChanged: (country) {
                                         log('Country code selected: ${country.code}');
@@ -100,6 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                               ),
+                              // Mobile TextField
                               Flexible(
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 8.0),
@@ -123,6 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                         ),
+                        // Get Code Button
                         CustomButton(
                           onPressed: () {
                             formKey.currentState!.save();
@@ -137,8 +144,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           bgColor: ColorPalettes.primaryTextColor,
                           btnWidth: MediaQuery.of(context).size.width * 0.77,
                           btnHeight: MediaQuery.of(context).size.height * 0.05,
-                          buttonTitle: 'Get Code',
+                          buttonTitle: ProjectStrings.lsCodeButton,
                         ),
+                        // Whatsapp Update Switch
                         Padding(
                           padding: const EdgeInsets.only(top: 20.0),
                           child: Row(
@@ -160,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               const Padding(
                                 padding: EdgeInsets.only(left: 6.0, right: 5.0),
                                 child: Text(
-                                  'Get updates on whatsapp',
+                                  ProjectStrings.lsWhatsappUpdate,
                                   style: TextStyle(fontSize: 10, color: ColorPalettes.secondaryTextColor),
                                 ),
                               ),
@@ -177,12 +185,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
+                  // Terms and Conditions
                   SizedBox(
                     height: screenHeight * 0.05,
                     child: Column(
                       children: [
                         const Text(
-                          'By proceeding, I agree to',
+                          ProjectStrings.lsTermsText1,
                           style: TextStyle(fontSize: 10, color: ColorPalettes.secondaryTextColor),
                         ),
                         InkWell(
@@ -191,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
                             child: Text(
-                              'Terms and Conditions & Privacy policy',
+                              ProjectStrings.lsTermsText2,
                               style: TextStyle(
                                 fontSize: 10,
                                 color: ColorPalettes.blueColor,
