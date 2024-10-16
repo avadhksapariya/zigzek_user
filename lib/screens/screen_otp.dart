@@ -6,6 +6,7 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:zigzek_user/constants/color_palettes.dart';
 import 'package:zigzek_user/constants/project_strings.dart';
 import 'package:zigzek_user/customs/custom_button.dart';
+import 'package:zigzek_user/screens/screen_personal_info.dart';
 
 class OTPScreen extends StatefulWidget {
   const OTPScreen({super.key});
@@ -42,88 +43,93 @@ class _OTPScreenState extends State<OTPScreen> {
         child: Container(
           width: screenWidth,
           height: screenHeight,
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.only(bottom: 8.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
-                  height: screenHeight * 0.86,
-                  child: Column(
-                    children: [
-                      // Image
-                      const Image(
-                        image: AssetImage('assets/images/img_userphone1.png'),
-                        height: 275,
-                        width: 250,
-                      ),
-                      // OTP
-                      OtpTextField(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        onCodeChanged: (value) {
-                          isOTPError = false;
-                        },
-                        onSubmit: (value) {
-                          otpCode = value;
-                          log('Code: $otpCode');
-                        },
-                        numberOfFields: 6,
-                        showFieldAsBox: true,
-                        borderRadius: BorderRadius.circular(6),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
-                        margin: const EdgeInsets.only(right: 12.8),
-                        cursorColor: ColorPalettes.secondaryTextColor,
-                        keyboardType: TextInputType.number,
-                        textStyle: const TextStyle(
-                          color: ColorPalettes.primaryTextColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
+                  height: screenHeight * 0.85,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        // Image
+                        const Image(
+                          image: AssetImage('assets/images/img_userphone1.png'),
+                          height: 275,
+                          width: 250,
                         ),
-                        borderWidth: 0.8,
-                        filled: true,
-                        fillColor: ColorPalettes.labelBgColor,
-                        borderColor: ColorPalettes.secondaryTextColor,
-                        enabledBorderColor: ColorPalettes.secondaryTextColor,
-                        focusedBorderColor: ColorPalettes.secondaryTextColor,
-                      ),
-                      if (isOTPError)
-                        const Padding(
-                          padding: EdgeInsets.only(left: 20.0, top: 2.0),
-                          child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                ProjectStrings.otpError,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: ColorPalettes.errorColor,
-                                ),
-                              )),
-                        ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Text.rich(
-                          TextSpan(
-                            text: ProjectStrings.otpResendCode1,
-                            style: const TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.w400, color: ColorPalettes.secondaryTextColor),
-                            children: [
-                              const TextSpan(
-                                text: ProjectStrings.otpResendCode2,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: ColorPalettes.primaryTextColor,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: ColorPalettes.primaryTextColor,
-                                ),
-                              ),
-                              TextSpan(text: '(${remainingTime.toString()}s)'),
-                            ],
+                        // OTP
+                        Padding(
+                          padding: const EdgeInsets.only(left: 12.0),
+                          child: OtpTextField(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            onCodeChanged: (value) {
+                              isOTPError = false;
+                            },
+                            onSubmit: (value) {
+                              otpCode = value;
+                              log('Code: $otpCode');
+                            },
+                            numberOfFields: 6,
+                            showFieldAsBox: true,
+                            borderRadius: BorderRadius.circular(6),
+                            contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
+                            margin: const EdgeInsets.only(right: 12.8),
+                            cursorColor: ColorPalettes.secondaryTextColor,
+                            keyboardType: TextInputType.number,
+                            textStyle: const TextStyle(
+                              color: ColorPalettes.primaryTextColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            borderWidth: 0.8,
+                            filled: true,
+                            fillColor: ColorPalettes.labelBgColor,
+                            borderColor: ColorPalettes.secondaryTextColor,
+                            enabledBorderColor: ColorPalettes.secondaryTextColor,
+                            focusedBorderColor: ColorPalettes.secondaryTextColor,
                           ),
                         ),
-                      ),
-                    ],
+                        if (isOTPError)
+                          const Padding(
+                            padding: EdgeInsets.only(left: 20.0, top: 2.0),
+                            child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  ProjectStrings.otpError,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: ColorPalettes.errorColor,
+                                  ),
+                                )),
+                          ),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text.rich(
+                            TextSpan(
+                              text: ProjectStrings.otpResendCode1,
+                              style: const TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.w400, color: ColorPalettes.secondaryTextColor),
+                              children: [
+                                const TextSpan(
+                                  text: ProjectStrings.otpResendCode2,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: ColorPalettes.primaryTextColor,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: ColorPalettes.primaryTextColor,
+                                  ),
+                                ),
+                                TextSpan(text: '(${remainingTime.toString()}s)'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -132,6 +138,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     onPressed: () {
                       if (otpCode.isNotEmpty) {
                         log('Go ahead, valid otp.');
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PersonalInfoScreen()));
                       } else {
                         isOTPError = true;
                         log('Invalid otp.');

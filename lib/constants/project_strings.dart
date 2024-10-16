@@ -10,4 +10,23 @@ class ProjectStrings {
   static const String otpResendCode2 = 'Send Again';
   static const String otpVerify = 'Verify';
   static const String otpError = 'Invalid OTP input';
+  static const String psInfoStep = '1';
+  static const String psInfoTitle = 'Personal Info';
+  static const String psInfoGreeting1 = 'Welcome';
+  static const String psInfoGreeting2 = 'Tell us a bit about yourself';
+  static const String psNameLabel = 'Full Name';
+  static const String psNameHint = 'Enter Name';
+  static const String psNameError = 'Full Name required';
+  static const String psMailLabel = 'Email ID';
+  static const String psMailHint = 'Enter Email ID';
+  static const String psMailError = 'Email ID required';
+  static const String psGenderTitle = 'Gender';
+  static const String psGenderMale = 'Male';
+  static const String psGenderFemale = 'Female';
+  static const String psGenderError = 'Selection required';
+  static const String psSubmitBtnName = 'Continue';
+  static const String birthInfoStep = '2';
+  static const String birthInfoTitle = 'Birth details';
+  static const String languagesStep = '3';
+  static const String languagesTitle = 'Languages';
 }

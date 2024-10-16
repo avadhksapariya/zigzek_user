@@ -46,171 +46,175 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   SizedBox(
                     height: screenHeight * 0.86,
-                    child: Column(
-                      children: [
-                        // Image
-                        const Image(
-                          image: AssetImage('assets/images/img_userphone1.png'),
-                          height: 275,
-                          width: 250,
-                        ),
-                        // Title
-                        const Text(
-                          ProjectStrings.lsTitle,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        // SubTitle
-                        const Padding(
-                          padding: EdgeInsets.all(4.0),
-                          child: Text(
-                            ProjectStrings.lsSubTitle,
-                            style: TextStyle(fontSize: 12, color: ColorPalettes.secondaryTextColor),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          // Image
+                          const Image(
+                            image: AssetImage('assets/images/img_userphone1.png'),
+                            height: 275,
+                            width: 250,
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0).copyWith(top: 30.0, bottom: 10.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // Country Code Dropdown
-                              Flexible(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: ColorPalettes.borderColor,
-                                      width: 1.0,
+                          // Title
+                          const Text(
+                            ProjectStrings.lsTitle,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          // SubTitle
+                          const Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Text(
+                              ProjectStrings.lsSubTitle,
+                              style: TextStyle(fontSize: 12, color: ColorPalettes.secondaryTextColor),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0).copyWith(top: 30.0, bottom: 10.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Country Code Dropdown
+                                Flexible(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorPalettes.borderColor,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: const BorderRadius.all(Radius.circular(24)),
                                     ),
-                                    borderRadius: const BorderRadius.all(Radius.circular(24)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 8.0, top: 2.5, bottom: 2.5),
+                                      child: CountryCodePicker(
+                                        mode: CountryCodePickerMode.dialog,
+                                        boxDecoration: const BoxDecoration(
+                                          color: ColorPalettes.backgroundColor,
+                                        ),
+                                        onChanged: (country) {
+                                          log('Country code selected: ${country.code}');
+                                          prefixCode = country.dialCode;
+                                        },
+                                        flagWidth: 24.0,
+                                        initialSelection: 'IN',
+                                        favorite: const ['IN'],
+                                        showFlag: true,
+                                        hideMainText: true,
+                                        showDropDownButton: true,
+                                        icon: const Icon(Icons.keyboard_arrow_down, color: ColorPalettes.borderColor),
+                                      ),
+                                    ),
                                   ),
+                                ),
+                                // Mobile TextField
+                                Flexible(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 8.0, top: 2.5, bottom: 2.5),
-                                    child: CountryCodePicker(
-                                      mode: CountryCodePickerMode.dialog,
-                                      boxDecoration: const BoxDecoration(
-                                        color: ColorPalettes.backgroundColor,
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: CustomTextField(
+                                      controller: mobileController,
+                                      prefixIcon: Padding(
+                                        padding: const EdgeInsets.fromLTRB(8.0, 13.7, 2.0, 13.7),
+                                        child: Text(
+                                          prefixCode,
+                                          style: const TextStyle(color: ColorPalettes.borderColor),
+                                        ),
                                       ),
-                                      onChanged: (country) {
-                                        log('Country code selected: ${country.code}');
-                                        prefixCode = country.dialCode;
-                                      },
-                                      flagWidth: 24.0,
-                                      initialSelection: 'IN',
-                                      favorite: const ['IN'],
-                                      showFlag: true,
-                                      hideMainText: true,
-                                      showDropDownButton: true,
-                                      icon: const Icon(Icons.keyboard_arrow_down, color: ColorPalettes.borderColor),
+                                      inputType: 'phone',
+                                      enableField: true,
+                                      required: true,
+                                      isTypeNumber: true,
+                                      maxLines: 1,
                                     ),
                                   ),
                                 ),
-                              ),
-                              // Mobile TextField
-                              Flexible(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
-                                  child: CustomTextField(
-                                    controller: mobileController,
-                                    prefixIcon: Padding(
-                                      padding: const EdgeInsets.fromLTRB(8.0, 13.7, 2.0, 13.7),
-                                      child: Text(
-                                        prefixCode,
-                                        style: const TextStyle(color: ColorPalettes.borderColor),
-                                      ),
-                                    ),
-                                    inputType: 'phone',
-                                    enableField: true,
-                                    required: true,
-                                    isTypeNumber: true,
-                                    maxLines: 1,
+                              ],
+                            ),
+                          ),
+                          // Get Code Button
+                          CustomButton(
+                            onPressed: () {
+                              formKey.currentState!.save();
+                              if (formKey.currentState!.validate()) {
+                                log('Go ahead, valid credentials.');
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const OTPScreen()));
+                              } else {
+                                log('Invalid credentials.');
+                              }
+                            },
+                            fgColor: ColorPalettes.labelBgColor,
+                            bgColor: ColorPalettes.primaryTextColor,
+                            btnWidth: MediaQuery.of(context).size.width * 0.77,
+                            btnHeight: MediaQuery.of(context).size.height * 0.05,
+                            buttonTitle: ProjectStrings.lsCodeButton,
+                          ),
+                          // Whatsapp Update Switch
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Switch(
+                                  value: isWAUpdates,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      isWAUpdates = value;
+                                    });
+                                  },
+                                  trackOutlineWidth: WidgetStateProperty.all(double.nan),
+                                  activeColor: ColorPalettes.primaryTextColor,
+                                  activeTrackColor: ColorPalettes.greenColor,
+                                  inactiveThumbColor: ColorPalettes.secondaryTextColor,
+                                  inactiveTrackColor: ColorPalettes.disabledLabelBgColor,
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 6.0, right: 5.0),
+                                  child: Text(
+                                    ProjectStrings.lsWhatsappUpdate,
+                                    style: TextStyle(fontSize: 10, color: ColorPalettes.secondaryTextColor),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        // Get Code Button
-                        CustomButton(
-                          onPressed: () {
-                            formKey.currentState!.save();
-                            if (formKey.currentState!.validate()) {
-                              log('Go ahead, valid credentials.');
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const OTPScreen()));
-                            } else {
-                              log('Invalid credentials.');
-                            }
-                          },
-                          fgColor: ColorPalettes.labelBgColor,
-                          bgColor: ColorPalettes.primaryTextColor,
-                          btnWidth: MediaQuery.of(context).size.width * 0.77,
-                          btnHeight: MediaQuery.of(context).size.height * 0.05,
-                          buttonTitle: ProjectStrings.lsCodeButton,
-                        ),
-                        // Whatsapp Update Switch
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Switch(
-                                value: isWAUpdates,
-                                onChanged: (value) {
-                                  setState(() {
-                                    isWAUpdates = value;
-                                  });
-                                },
-                                trackOutlineWidth: WidgetStateProperty.all(double.nan),
-                                activeColor: ColorPalettes.primaryTextColor,
-                                activeTrackColor: ColorPalettes.greenColor,
-                                inactiveThumbColor: ColorPalettes.secondaryTextColor,
-                                inactiveTrackColor: ColorPalettes.disabledLabelBgColor,
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 6.0, right: 5.0),
-                                child: Text(
-                                  ProjectStrings.lsWhatsappUpdate,
-                                  style: TextStyle(fontSize: 10, color: ColorPalettes.secondaryTextColor),
+                                Flexible(
+                                  child: Image.asset(
+                                    'assets/images/img_whatsapp.png',
+                                    height: 14,
+                                    width: 14,
+                                  ),
                                 ),
-                              ),
-                              Flexible(
-                                child: Image.asset(
-                                  'assets/images/img_whatsapp.png',
-                                  height: 14,
-                                  width: 14,
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   // Terms and Conditions
                   SizedBox(
                     height: screenHeight * 0.05,
-                    child: Column(
-                      children: [
-                        const Text(
-                          ProjectStrings.lsTermsText1,
-                          style: TextStyle(fontSize: 10, color: ColorPalettes.secondaryTextColor),
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          borderRadius: const BorderRadius.all(Radius.circular(24)),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
-                            child: Text(
-                              ProjectStrings.lsTermsText2,
-                              style: TextStyle(
-                                fontSize: 10,
-                                color: ColorPalettes.blueColor,
-                                decoration: TextDecoration.underline,
-                                decorationColor: ColorPalettes.blueColor,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          const Text(
+                            ProjectStrings.lsTermsText1,
+                            style: TextStyle(fontSize: 10, color: ColorPalettes.secondaryTextColor),
+                          ),
+                          InkWell(
+                            onTap: () {},
+                            borderRadius: const BorderRadius.all(Radius.circular(24)),
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+                              child: Text(
+                                ProjectStrings.lsTermsText2,
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: ColorPalettes.blueColor,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: ColorPalettes.blueColor,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],

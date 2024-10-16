@@ -79,7 +79,7 @@ class CustomTextField extends StatelessWidget {
           gapPadding: 4.0,
           borderSide: BorderSide(
             width: 1,
-            color: ColorPalettes.redPrimaryColor,
+            color: ColorPalettes.errorColor,
           ),
         ),
         errorStyle: const TextStyle(color: ColorPalettes.errorColor),
