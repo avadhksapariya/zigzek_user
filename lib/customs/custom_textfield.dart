@@ -86,7 +86,7 @@ class CustomTextField extends StatelessWidget {
         contentPadding: const EdgeInsets.symmetric(horizontal: 14.0),
         prefixIcon: prefixIcon,
         labelText: label,
-        labelStyle: Theme.of(context).textTheme.bodySmall!.copyWith(color: ColorPalettes.secondaryTextColor),
+        labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: ColorPalettes.secondaryTextColor),
         alignLabelWithHint: true,
       ),
     );
