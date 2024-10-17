@@ -61,7 +61,7 @@ class CustomTextField extends StatelessWidget {
       maxLines: maxLines,
       maxLength: maxLength,
       obscureText: isObscureText,
-      style: const TextStyle(fontSize: 14, color: ColorPalettes.secondaryTextColor),
+      style: Theme.of(context).textTheme.bodyLarge,
       cursorColor: ColorPalettes.secondaryTextColor,
       keyboardType: isTypeNumber != null ? TextInputType.number : null,
       validator: (required != null && required == true)
@@ -86,7 +86,7 @@ class CustomTextField extends StatelessWidget {
         contentPadding: const EdgeInsets.symmetric(horizontal: 14.0),
         prefixIcon: prefixIcon,
         labelText: label,
-        labelStyle: const TextStyle(color: ColorPalettes.secondaryTextColor),
+        labelStyle: Theme.of(context).textTheme.bodySmall!.copyWith(color: ColorPalettes.secondaryTextColor),
         alignLabelWithHint: true,
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zigzek_user/constants/color_palettes.dart';
 import 'package:zigzek_user/constants/project_strings.dart';
-import 'package:zigzek_user/widgets/widget_dashed_line.dart';
+import 'package:zigzek_user/widgets/widget_steps_indicator.dart';
 
 class PersonalInfoScreen extends StatefulWidget {
   const PersonalInfoScreen({super.key});
@@ -37,98 +37,50 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 32.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Column(
-                                children: [
-                                  CircleAvatar(
-                                    backgroundColor: ColorPalettes.labelBgColor,
-                                    radius: 10,
-                                    child: Text(
-                                      ProjectStrings.psInfoStep,
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w400,
-                                          color: ColorPalettes.primaryTextColor),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 4.0),
-                                    child: Text(
-                                      ProjectStrings.psInfoTitle,
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w400,
-                                        color: ColorPalettes.secondaryTextColor,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              CustomPaint(
-                                painter: DashedLinePainter(),
-                                size: const Size(40, 20),
-                              ),
-                              const Column(
-                                children: [
-                                  CircleAvatar(
-                                    backgroundColor: ColorPalettes.labelBgColor,
-                                    radius: 10,
-                                    child: Text(
-                                      ProjectStrings.birthInfoStep,
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w400,
-                                          color: ColorPalettes.primaryTextColor),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 4.0),
-                                    child: Text(
-                                      ProjectStrings.birthInfoTitle,
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w400,
-                                        color: ColorPalettes.secondaryTextColor,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              CustomPaint(
-                                painter: DashedLinePainter(),
-                                size: const Size(40, 20),
-                              ),
-                              const Column(
-                                children: [
-                                  CircleAvatar(
-                                    backgroundColor: ColorPalettes.labelBgColor,
-                                    radius: 10,
-                                    child: Text(
-                                      ProjectStrings.languagesStep,
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w400,
-                                          color: ColorPalettes.primaryTextColor),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 4.0),
-                                    child: Text(
-                                      ProjectStrings.languagesTitle,
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.w400,
-                                        color: ColorPalettes.secondaryTextColor,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                          child: StepsIndicatorWidget(
+                            stepNumOne: Text(
+                              ProjectStrings.psInfoStep,
+                              style: Theme.of(context).textTheme.bodySmall!.copyWith(color: ColorPalettes.labelBgColor),
+                            ),
+                            stepOneTitle: Text(
+                              ProjectStrings.psInfoTitle,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            stepOneBgColor: ColorPalettes.primaryTextColor,
+                            stepNumTwo: Text(
+                              ProjectStrings.birthInfoStep,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            stepTwoTitle: Text(
+                              ProjectStrings.birthInfoTitle,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(color: ColorPalettes.secondaryTextColor),
+                            ),
+                            stepTwoBgColor: ColorPalettes.labelBgColor,
+                            stepNumThree: Text(
+                              ProjectStrings.languagesStep,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            stepThreeTitle: Text(
+                              ProjectStrings.languagesTitle,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(color: ColorPalettes.secondaryTextColor),
+                            ),
+                            stepThreeBgColor: ColorPalettes.labelBgColor,
                           ),
+                        ),
+                        Text(
+                          ProjectStrings.psInfoGreeting1,
+                          style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 24),
+                        ),
+                        Text(
+                          ProjectStrings.psInfoGreeting2,
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(color: ColorPalettes.secondaryTextColor),
                         ),
                       ],
                     ),

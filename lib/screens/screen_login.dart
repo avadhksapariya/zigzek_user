@@ -56,16 +56,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             width: 250,
                           ),
                           // Title
-                          const Text(
+                          Text(
                             ProjectStrings.lsTitle,
-                            style: TextStyle(fontSize: 20),
+                            style: Theme.of(context).textTheme.titleLarge,
                           ),
                           // SubTitle
-                          const Padding(
-                            padding: EdgeInsets.all(4.0),
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
                             child: Text(
                               ProjectStrings.lsSubTitle,
-                              style: TextStyle(fontSize: 12, color: ColorPalettes.secondaryTextColor),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(color: ColorPalettes.secondaryTextColor),
                             ),
                           ),
                           Padding(
@@ -116,7 +119,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                         padding: const EdgeInsets.fromLTRB(8.0, 13.7, 2.0, 13.7),
                                         child: Text(
                                           prefixCode,
-                                          style: const TextStyle(color: ColorPalettes.borderColor),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge!
+                                              .copyWith(color: ColorPalettes.secondaryTextColor),
                                         ),
                                       ),
                                       inputType: 'phone',
@@ -166,18 +172,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                   inactiveThumbColor: ColorPalettes.secondaryTextColor,
                                   inactiveTrackColor: ColorPalettes.disabledLabelBgColor,
                                 ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 6.0, right: 5.0),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 6.0, right: 5.0),
                                   child: Text(
                                     ProjectStrings.lsWhatsappUpdate,
-                                    style: TextStyle(fontSize: 10, color: ColorPalettes.secondaryTextColor),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .copyWith(color: ColorPalettes.secondaryTextColor),
                                   ),
                                 ),
                                 Flexible(
                                   child: Image.asset(
                                     'assets/images/img_whatsapp.png',
-                                    height: 14,
-                                    width: 14,
+                                    height: 16,
+                                    width: 16,
                                   ),
                                 ),
                               ],
@@ -193,23 +202,25 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          const Text(
+                          Text(
                             ProjectStrings.lsTermsText1,
-                            style: TextStyle(fontSize: 10, color: ColorPalettes.secondaryTextColor),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .copyWith(color: ColorPalettes.secondaryTextColor),
                           ),
                           InkWell(
                             onTap: () {},
                             borderRadius: const BorderRadius.all(Radius.circular(24)),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
                               child: Text(
                                 ProjectStrings.lsTermsText2,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: ColorPalettes.blueColor,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: ColorPalettes.blueColor,
-                                ),
+                                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                      color: ColorPalettes.blueColor,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: ColorPalettes.blueColor,
+                                    ),
                               ),
                             ),
                           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zigzek_user/constants/color_palettes.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -32,7 +33,7 @@ class CustomButton extends StatelessWidget {
       ),
       child: Text(
         buttonTitle,
-        style: const TextStyle(fontSize: 16),
+        style: Theme.of(context).textTheme.titleSmall!.copyWith(color: ColorPalettes.labelBgColor),
       ),
     );
   }

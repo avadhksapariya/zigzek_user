@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:zigzek_user/constants/text_themes.dart';
 import 'package:zigzek_user/screens/screen_splash.dart';
 
 void main() {
@@ -16,10 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'ZigZek',
       theme: ThemeData(
         brightness: Brightness.dark,
-        textTheme: GoogleFonts.poppinsTextTheme().apply(
-            bodyColor: Colors.white,
-            displayColor: Colors.white,
-        ),
+        textTheme: AppTextThemes.darkTextTheme,
         useMaterial3: true,
       ),
       themeMode: ThemeMode.dark,

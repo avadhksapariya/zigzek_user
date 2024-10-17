@@ -78,11 +78,7 @@ class _OTPScreenState extends State<OTPScreen> {
                             margin: const EdgeInsets.only(right: 12.8),
                             cursorColor: ColorPalettes.secondaryTextColor,
                             keyboardType: TextInputType.number,
-                            textStyle: const TextStyle(
-                              color: ColorPalettes.primaryTextColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
+                            textStyle: Theme.of(context).textTheme.titleSmall,
                             borderWidth: 0.8,
                             filled: true,
                             fillColor: ColorPalettes.labelBgColor,
@@ -92,38 +88,41 @@ class _OTPScreenState extends State<OTPScreen> {
                           ),
                         ),
                         if (isOTPError)
-                          const Padding(
-                            padding: EdgeInsets.only(left: 20.0, top: 2.0),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 27.0, top: 2.0),
                             child: Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  ProjectStrings.otpError,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: ColorPalettes.errorColor,
-                                  ),
-                                )),
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                ProjectStrings.otpError,
+                                style: Theme.of(context).textTheme.bodySmall!.copyWith(color: ColorPalettes.errorColor),
+                              ),
+                            ),
                           ),
                         Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Text.rich(
                             TextSpan(
                               text: ProjectStrings.otpResendCode1,
-                              style: const TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.w400, color: ColorPalettes.secondaryTextColor),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(color: ColorPalettes.secondaryTextColor),
                               children: [
-                                const TextSpan(
+                                TextSpan(
                                   text: ProjectStrings.otpResendCode2,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: ColorPalettes.primaryTextColor,
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: ColorPalettes.primaryTextColor,
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                        color: ColorPalettes.primaryTextColor,
+                                        decoration: TextDecoration.underline,
+                                        decorationColor: ColorPalettes.primaryTextColor,
+                                      ),
                                 ),
-                                TextSpan(text: '(${remainingTime.toString()}s)'),
+                                TextSpan(
+                                  text: '(${remainingTime.toString()}s)',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(color: ColorPalettes.secondaryTextColor),
+                                ),
                               ],
                             ),
                           ),
