@@ -104,6 +104,12 @@ class CustomTextField extends StatelessWidget {
           if (phoneLength < 10) {
             return ProjectStrings.lsEmptyMobileError;
           }
+          break;
+        default:
+      }
+    } else {
+      if (value == null || value.isEmpty) {
+        return validationLabel != null ? '$validationLabel required' : 'This field is required';
       }
     }
   }

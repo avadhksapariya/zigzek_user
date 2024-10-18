@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:zigzek_user/constants/color_palettes.dart';
 import 'package:zigzek_user/constants/project_strings.dart';
@@ -19,6 +21,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   Gender gender = Gender.none;
+  bool isGenderError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +42,12 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                 child: Column(
                   children: [
                     SizedBox(
-                      width: screenWidth * 0.8,
+                      height: screenHeight * 0.82,
+                      width: screenWidth * 0.9,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          // Step Indicator
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 32.0),
                             child: StepsIndicatorWidget(
@@ -82,6 +87,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               stepThreeBgColor: ColorPalettes.labelBgColor,
                             ),
                           ),
+                          // Welcome
                           Text(
                             ProjectStrings.psInfoGreeting1,
                             style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 24),
@@ -96,6 +102,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                   .copyWith(color: ColorPalettes.secondaryTextColor),
                             ),
                           ),
+                          // Full Name
                           Align(
                             alignment: Alignment.topLeft,
                             child: Padding(
@@ -111,8 +118,14 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                             child: CustomTextField(
                               controller: nameController,
                               label: ProjectStrings.psNameHint,
+                              validationLabel: ProjectStrings.psNameLabel,
+                              keyBoardInput: TextInputType.text,
+                              enableField: true,
+                              required: true,
+                              maxLines: 1,
                             ),
                           ),
+                          // Email Id
                           Align(
                             alignment: Alignment.topLeft,
                             child: Padding(
@@ -128,8 +141,14 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                             child: CustomTextField(
                               controller: emailController,
                               label: ProjectStrings.psMailHint,
+                              validationLabel: ProjectStrings.psMailLabel,
+                              keyBoardInput: TextInputType.text,
+                              enableField: true,
+                              required: true,
+                              maxLines: 1,
                             ),
                           ),
+                          // Gender Title
                           Align(
                             alignment: Alignment.topLeft,
                             child: Padding(
@@ -140,6 +159,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               ),
                             ),
                           ),
+                          // Gender Radio
                           Align(
                             alignment: Alignment.topLeft,
                             child: Row(
@@ -152,6 +172,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                   onChanged: (value) {
                                     setState(() {
                                       gender = value!;
+                                      isGenderError = false;
                                     });
                                   },
                                 ),
@@ -171,6 +192,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                   onChanged: (value) {
                                     setState(() {
                                       gender = value!;
+                                      isGenderError = false;
                                     });
                                   },
                                 ),
@@ -184,17 +206,41 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               ],
                             ),
                           ),
-                          CustomButton(
-                            onPressed: () {},
-                            fgColor: ColorPalettes.labelBgColor,
-                            bgColor: ColorPalettes.primaryTextColor,
-                            btnWidth: MediaQuery.of(context).size.width * 0.85,
-                            btnHeight: MediaQuery.of(context).size.height * 0.05,
-                            buttonTitle: 'Continue',
-                          )
+                          if (isGenderError)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4.0),
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  ProjectStrings.psGenderError,
+                                  style:
+                                      Theme.of(context).textTheme.bodySmall!.copyWith(color: ColorPalettes.errorColor),
+                                ),
+                              ),
+                            ),
                         ],
                       ),
                     ),
+                    // Continue
+                    SizedBox(
+                      height: screenHeight * 0.05,
+                      child: CustomButton(
+                        onPressed: () {
+                          formKey.currentState!.save();
+                          if (formKey.currentState!.validate() && gender != Gender.none) {
+                            log('Go ahead, complete personal info.');
+                          } else {
+                            isGenderError = true;
+                            log('Incomplete personal info.');
+                          }
+                        },
+                        fgColor: ColorPalettes.labelBgColor,
+                        bgColor: ColorPalettes.primaryTextColor,
+                        btnWidth: MediaQuery.of(context).size.width * 0.85,
+                        btnHeight: MediaQuery.of(context).size.height * 0.05,
+                        buttonTitle: 'Continue',
+                      ),
+                    )
                   ],
                 ),
               ),

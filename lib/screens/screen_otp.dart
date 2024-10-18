@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:zigzek_user/constants/color_palettes.dart';
 import 'package:zigzek_user/constants/project_strings.dart';
@@ -78,6 +79,7 @@ class _OTPScreenState extends State<OTPScreen> {
                             margin: const EdgeInsets.only(right: 12.8),
                             cursorColor: ColorPalettes.secondaryTextColor,
                             keyboardType: TextInputType.number,
+                            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                             textStyle: Theme.of(context).textTheme.titleSmall,
                             borderWidth: 0.8,
                             filled: true,
