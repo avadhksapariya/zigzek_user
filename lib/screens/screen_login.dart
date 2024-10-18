@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:country_code_picker_plus/country_code_picker_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:zigzek_user/constants/color_palettes.dart';
 import 'package:zigzek_user/constants/project_strings.dart';
 import 'package:zigzek_user/customs/custom_button.dart';
@@ -126,9 +127,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                       ),
                                       inputType: 'phone',
+                                      keyBoardInput: TextInputType.phone,
+                                      textInputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                       enableField: true,
                                       required: true,
-                                      isTypeNumber: true,
                                       maxLines: 1,
                                     ),
                                   ),
@@ -176,10 +178,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   padding: const EdgeInsets.only(left: 6.0, right: 5.0),
                                   child: Text(
                                     ProjectStrings.lsWhatsappUpdate,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall!
-                                        .copyWith(color: ColorPalettes.secondaryTextColor),
+                                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                        color: isWAUpdates
+                                            ? ColorPalettes.primaryTextColor
+                                            : ColorPalettes.secondaryTextColor),
                                   ),
                                 ),
                                 Flexible(
@@ -209,20 +211,48 @@ class _LoginScreenState extends State<LoginScreen> {
                                 .bodySmall!
                                 .copyWith(color: ColorPalettes.secondaryTextColor),
                           ),
-                          InkWell(
-                            onTap: () {},
-                            borderRadius: const BorderRadius.all(Radius.circular(24)),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
-                              child: Text(
-                                ProjectStrings.lsTermsText2,
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              InkWell(
+                                onTap: () {},
+                                borderRadius: const BorderRadius.all(Radius.circular(24)),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+                                  child: Text(
+                                    ProjectStrings.lsTermsText2,
+                                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                          color: ColorPalettes.blueColor,
+                                          decoration: TextDecoration.underline,
+                                          decorationColor: ColorPalettes.blueColor,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                '&',
                                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                                       color: ColorPalettes.blueColor,
                                       decoration: TextDecoration.underline,
                                       decorationColor: ColorPalettes.blueColor,
                                     ),
                               ),
-                            ),
+                              InkWell(
+                                onTap: () {},
+                                borderRadius: const BorderRadius.all(Radius.circular(24)),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+                                  child: Text(
+                                    ProjectStrings.lsTermsText3,
+                                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                          color: ColorPalettes.blueColor,
+                                          decoration: TextDecoration.underline,
+                                          decorationColor: ColorPalettes.blueColor,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

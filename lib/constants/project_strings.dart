@@ -5,7 +5,8 @@ class ProjectStrings {
   static const String lsCodeButton = 'Get code';
   static const String lsWhatsappUpdate = 'Get updates on Whatsapp';
   static const String lsTermsText1 = 'By proceeding, I agree to';
-  static const String lsTermsText2 = 'Terms and Conditions & Privacy policy';
+  static const String lsTermsText2 = 'Terms and Conditions';
+  static const String lsTermsText3 = 'Privacy policy';
   static const String otpResendCode1 = 'Didn’t Receive code? ';
   static const String otpResendCode2 = 'Send Again';
   static const String otpVerify = 'Verify';

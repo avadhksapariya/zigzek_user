@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:zigzek_user/constants/color_palettes.dart';
 import 'package:zigzek_user/constants/project_strings.dart';
 
@@ -12,7 +13,8 @@ class CustomTextField extends StatelessWidget {
     this.required,
     this.enableField,
     this.inputType,
-    this.isTypeNumber,
+    this.keyBoardInput,
+    this.textInputFormatters,
     this.maxLines,
     this.maxLength,
     this.showCounterText,
@@ -30,7 +32,8 @@ class CustomTextField extends StatelessWidget {
   final bool? required;
   final bool? enableField;
   final String? inputType;
-  final bool? isTypeNumber;
+  final TextInputType? keyBoardInput;
+  final List<TextInputFormatter>? textInputFormatters;
   final int? maxLines;
   final int? maxLength;
   final bool? showCounterText;
@@ -63,7 +66,8 @@ class CustomTextField extends StatelessWidget {
       obscureText: isObscureText,
       style: Theme.of(context).textTheme.bodyLarge,
       cursorColor: ColorPalettes.secondaryTextColor,
-      keyboardType: isTypeNumber != null ? TextInputType.number : null,
+      keyboardType: keyBoardInput,
+      inputFormatters: textInputFormatters,
       validator: (required != null && required == true)
           ? (String? value) => validation(label, inputType, validationLabel, value)
           : null,
