@@ -146,6 +146,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               enableField: true,
                               required: true,
                               maxLines: 1,
+                              inputType: 'email',
+                              validationMode: AutovalidateMode.onUserInteraction,
                             ),
                           ),
                           // Gender Title
@@ -229,8 +231,13 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                           formKey.currentState!.save();
                           if (formKey.currentState!.validate() && gender != Gender.none) {
                             log('Go ahead, complete personal info.');
+                            setState(() {
+                              isGenderError = false;
+                            });
                           } else {
-                            isGenderError = true;
+                            setState(() {
+                              isGenderError = true;
+                            });
                             log('Incomplete personal info.');
                           }
                         },
