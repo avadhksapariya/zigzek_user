@@ -123,6 +123,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               enableField: true,
                               required: true,
                               maxLines: 1,
+                              validationMode: AutovalidateMode.onUserInteraction,
                             ),
                           ),
                           // Email Id

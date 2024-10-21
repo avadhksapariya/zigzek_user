@@ -21,6 +21,7 @@ class ProjectStrings {
   static const String psMailLabel = 'Email ID';
   static const String psMailHint = 'Enter Email ID';
   static const String psMailError = 'Email ID required';
+  static const String psInvalidMailError = 'Invalid email';
   static const String psGenderTitle = 'Gender';
   static const String psGenderMale = 'Male';
   static const String psGenderFemale = 'Female';

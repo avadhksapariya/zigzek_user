@@ -115,10 +115,11 @@ class CustomTextField extends StatelessWidget {
           }
           break;
         case 'email':
-          if (value == null ||
-              value.isEmpty ||
-              RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) == false) {
+          if (value == null || value.isEmpty) {
             return ProjectStrings.psMailError;
+          } else if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) ==
+              false) {
+            return ProjectStrings.psInvalidMailError;
           }
           break;
 
