@@ -31,4 +31,8 @@ class ProjectStrings {
   static const String birthInfoTitle = 'Birth details';
   static const String languagesStep = '3';
   static const String languagesTitle = 'Languages';
+  static const String btDetailsGreeting2 = 'Enter your birth details';
+  static const String btBirthDateLabel = 'Birth date';
+  static const String btBirthTimeLabel = 'Birth Time';
+  static const String btBirthPlaceLabel = 'Birth Place';
 }

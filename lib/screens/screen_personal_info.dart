@@ -6,6 +6,7 @@ import 'package:zigzek_user/constants/project_strings.dart';
 import 'package:zigzek_user/customs/custom_button.dart';
 import 'package:zigzek_user/customs/custom_radio.dart';
 import 'package:zigzek_user/customs/custom_textfield.dart';
+import 'package:zigzek_user/screens/screen_birth_details.dart';
 import 'package:zigzek_user/utils/enums.dart';
 import 'package:zigzek_user/widgets/widget_steps_indicator.dart';
 
@@ -231,10 +232,12 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                         onPressed: () {
                           formKey.currentState!.save();
                           if (formKey.currentState!.validate() && gender != Gender.none) {
-                            log('Go ahead, complete personal info.');
                             setState(() {
                               isGenderError = false;
                             });
+                            log('Go ahead, complete personal info.');
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) => const BirthDetailsScreen()));
                           } else {
                             setState(() {
                               isGenderError = true;
