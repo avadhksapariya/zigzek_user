@@ -33,6 +33,7 @@ dependencies:
   google_fonts: ^6.2.1
   country_code_picker_plus: ^0.0.9
   flutter_otp_text_field: ^1.2.0
+  intl: ^0.19.0
 
 
   # The following adds the Cupertino Icons font to your application.

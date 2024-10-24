@@ -1,9 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:zigzek_user/constants/color_palettes.dart';
 import 'package:zigzek_user/constants/project_strings.dart';
 import 'package:zigzek_user/customs/custom_button.dart';
+import 'package:zigzek_user/customs/custom_textfield.dart';
 import 'package:zigzek_user/utils/enums.dart';
 import 'package:zigzek_user/widgets/widget_steps_indicator.dart';
 
@@ -16,8 +16,10 @@ class BirthDetailsScreen extends StatefulWidget {
 
 class _BirthDetailsScreenState extends State<BirthDetailsScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController btDateController = TextEditingController();
+  final TextEditingController btTimeController = TextEditingController();
+  DateTime? birthDate;
+  TimeOfDay? birthTime;
   Gender gender = Gender.none;
   bool isGenderError = false;
 
@@ -40,7 +42,7 @@ class _BirthDetailsScreenState extends State<BirthDetailsScreen> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: screenHeight * 0.82,
+                      height: screenHeight * 0.77,
                       width: screenWidth * 0.9,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -98,16 +100,98 @@ class _BirthDetailsScreenState extends State<BirthDetailsScreen> {
                                   .copyWith(color: ColorPalettes.secondaryTextColor),
                             ),
                           ),
-                          // Birth date
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Flexible(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    // Birth date
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(bottom: 4.0),
+                                        child: Text(
+                                          ProjectStrings.btBirthDateLabel,
+                                          style: Theme.of(context).textTheme.bodyLarge,
+                                        ),
+                                      ),
+                                    ),
+                                    CustomTextField(
+                                      controller: btDateController,
+                                      hint: ProjectStrings.btBirthDateHint,
+                                      maxLines: 1,
+                                      tap: () async {
+                                        birthDate = await showDatePicker(
+                                          context: context,
+                                          firstDate: DateTime(DateTime.now().year - 100),
+                                          lastDate: DateTime.now(),
+                                          initialDate: DateTime.now(),
+                                        );
+
+                                        if (birthDate != null) {
+                                          String formattedDate = DateFormat('dd/MM/yyyy').format(birthDate!);
+                                          btDateController.text = formattedDate;
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 17,
+                              ),
+                              Flexible(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    // Birth time
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(bottom: 4.0),
+                                        child: Text(
+                                          ProjectStrings.btBirthTimeLabel,
+                                          style: Theme.of(context).textTheme.bodyLarge,
+                                        ),
+                                      ),
+                                    ),
+                                    CustomTextField(
+                                      controller: btTimeController,
+                                      hint: ProjectStrings.btBirthTimeHint,
+                                      maxLines: 1,
+                                      tap: () async {
+                                        birthTime = await showTimePicker(
+                                          context: context,
+                                          initialTime: TimeOfDay.now(),
+                                        );
+
+                                        if (birthTime != null) {
+                                          formatTime(birthTime);
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                           Align(
                             alignment: Alignment.topLeft,
                             child: Padding(
-                              padding: const EdgeInsets.only(bottom: 4.0),
+                              padding: const EdgeInsets.only(top: 16, bottom: 4.0),
                               child: Text(
-                                ProjectStrings.btBirthDateLabel,
+                                ProjectStrings.btBirthPlaceLabel,
                                 style: Theme.of(context).textTheme.bodyLarge,
                               ),
                             ),
+                          ),
+                          CustomTextField(
+                            controller: btDateController,
+                            hint: ProjectStrings.btBirthPlaceHint,
+                            maxLines: 1,
+                            tap: () {},
                           ),
                         ],
                       ),
@@ -116,25 +200,28 @@ class _BirthDetailsScreenState extends State<BirthDetailsScreen> {
                     SizedBox(
                       height: screenHeight * 0.05,
                       child: CustomButton(
-                        onPressed: () {
-                          formKey.currentState!.save();
-                          if (formKey.currentState!.validate() && gender != Gender.none) {
-                            log('Go ahead, complete personal info.');
-                            setState(() {
-                              isGenderError = false;
-                            });
-                          } else {
-                            setState(() {
-                              isGenderError = true;
-                            });
-                            log('Incomplete personal info.');
-                          }
-                        },
+                        onPressed: () {},
                         fgColor: ColorPalettes.labelBgColor,
                         bgColor: ColorPalettes.primaryTextColor,
+                        btnStyle: Theme.of(context).textTheme.titleSmall!.copyWith(color: ColorPalettes.labelBgColor),
                         btnWidth: MediaQuery.of(context).size.width * 0.85,
                         btnHeight: MediaQuery.of(context).size.height * 0.05,
-                        buttonTitle: 'Continue',
+                        buttonTitle: ProjectStrings.psSubmitBtnName,
+                      ),
+                    ),
+                    // Skip
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16.0),
+                      child: SizedBox(
+                        height: screenHeight * 0.05,
+                        child: CustomButton(
+                          onPressed: () {},
+                          btnStyle:
+                              Theme.of(context).textTheme.titleSmall!.copyWith(color: ColorPalettes.primaryTextColor),
+                          btnWidth: MediaQuery.of(context).size.width * 0.85,
+                          btnHeight: MediaQuery.of(context).size.height * 0.05,
+                          buttonTitle: ProjectStrings.btSkipBtnName,
+                        ),
                       ),
                     )
                   ],
@@ -145,5 +232,10 @@ class _BirthDetailsScreenState extends State<BirthDetailsScreen> {
         ),
       ),
     );
+  }
+
+  void formatTime(TimeOfDay? time) {
+    String formattedTime = time!.format(context);
+    btTimeController.text = formattedTime;
   }
 }

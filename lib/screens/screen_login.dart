@@ -151,6 +151,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             fgColor: ColorPalettes.labelBgColor,
                             bgColor: ColorPalettes.primaryTextColor,
+                            btnStyle:
+                                Theme.of(context).textTheme.titleSmall!.copyWith(color: ColorPalettes.labelBgColor),
                             btnWidth: MediaQuery.of(context).size.width * 0.77,
                             btnHeight: MediaQuery.of(context).size.height * 0.05,
                             buttonTitle: ProjectStrings.lsCodeButton,

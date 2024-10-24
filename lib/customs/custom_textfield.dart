@@ -7,7 +7,7 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     required this.controller,
-    this.label,
+    this.hint,
     this.validationLabel,
     this.validationMode,
     this.required,
@@ -27,7 +27,7 @@ class CustomTextField extends StatelessWidget {
   });
 
   final TextEditingController controller;
-  final String? label;
+  final String? hint;
   final String? validationLabel;
   final AutovalidateMode? validationMode;
   final bool? required;
@@ -71,7 +71,7 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyBoardInput,
       inputFormatters: textInputFormatters,
       validator: (required != null && required == true)
-          ? (String? value) => validation(label, inputType, validationLabel, value)
+          ? (String? value) => validation(hint, inputType, validationLabel, value)
           : null,
       autovalidateMode: validationMode,
       decoration: InputDecoration(
@@ -98,9 +98,8 @@ class CustomTextField extends StatelessWidget {
                 size: 20.0,
               )
             : suffixIcon,
-        labelText: label,
-        labelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: ColorPalettes.secondaryTextColor),
-        alignLabelWithHint: true,
+        hintText: hint,
+        hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: ColorPalettes.secondaryTextColor),
       ),
     );
   }

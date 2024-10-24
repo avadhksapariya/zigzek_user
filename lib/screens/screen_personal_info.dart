@@ -118,7 +118,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                             padding: const EdgeInsets.only(bottom: 16.0),
                             child: CustomTextField(
                               controller: nameController,
-                              label: ProjectStrings.psNameHint,
+                              hint: ProjectStrings.psNameHint,
                               validationLabel: ProjectStrings.psNameLabel,
                               keyBoardInput: TextInputType.text,
                               enableField: true,
@@ -142,7 +142,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                             padding: const EdgeInsets.only(bottom: 16.0),
                             child: CustomTextField(
                               controller: emailController,
-                              label: ProjectStrings.psMailHint,
+                              hint: ProjectStrings.psMailHint,
                               validationLabel: ProjectStrings.psMailLabel,
                               keyBoardInput: TextInputType.text,
                               enableField: true,
@@ -247,9 +247,10 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                         },
                         fgColor: ColorPalettes.labelBgColor,
                         bgColor: ColorPalettes.primaryTextColor,
+                        btnStyle: Theme.of(context).textTheme.titleSmall!.copyWith(color: ColorPalettes.labelBgColor),
                         btnWidth: MediaQuery.of(context).size.width * 0.85,
                         btnHeight: MediaQuery.of(context).size.height * 0.05,
-                        buttonTitle: 'Continue',
+                        buttonTitle: ProjectStrings.psSubmitBtnName,
                       ),
                     )
                   ],

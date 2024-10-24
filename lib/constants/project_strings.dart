@@ -33,6 +33,10 @@ class ProjectStrings {
   static const String languagesTitle = 'Languages';
   static const String btDetailsGreeting2 = 'Enter your birth details';
   static const String btBirthDateLabel = 'Birth date';
+  static const String btBirthDateHint = 'Select date';
   static const String btBirthTimeLabel = 'Birth Time';
+  static const String btBirthTimeHint = 'Select Time';
   static const String btBirthPlaceLabel = 'Birth Place';
+  static const String btBirthPlaceHint = 'Select Place';
+  static const String btSkipBtnName = 'Skip';
 }
